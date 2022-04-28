@@ -14,7 +14,7 @@ public class Mastermind {
     String strSecret; // The String version of the variable "secret". I used it to compare indices
     String correctGuess; // Takes the correct digits of the guess and passes them to the ArrayList named "correct"
     String game; // Determines if the game is starting or not
-    ArrayList<String> correct = new ArrayList<String>(); // The ArrayList containing the correct digits
+    ArrayList<String> correct = new ArrayList<>(); // The ArrayList containing the correct digits
 
     public Mastermind(){
         Scanner startGame = new Scanner(System.in);
@@ -68,8 +68,23 @@ public class Mastermind {
             }
 
             if (guess == secret) {
-                System.out.println("You've become a Mastermind! It took you " + guessCount + " guesses.");
-                break;
+                if (guessCount <= 3){
+                    System.out.println("You've become a Mastermind!");
+                    System.out.println("And wow! It took you only " + guessCount + " guesses! \uD83D\uDE0E");
+                    break;
+                }
+                else if (guessCount <= 10){
+                    System.out.println("You've become a Mastermind!");
+                    System.out.println("It took you " + guessCount + " guesses! Try harder next time!");
+                    break;
+                }
+                else {
+                    System.out.println("You've become a Mastermind!");
+                    System.out.println("It took you " + guessCount + " guesses! What rotten luck! \uD83D\uDE10");
+                    break;
+                }
+
+
             }
         }
     }
