@@ -1,7 +1,7 @@
 # java-mastermind
 AP Computer Science Principles Create Performance Task
 
-````
+```
                       _                      _           _
                      | |                    (_)         | |
   _ __ ___   __ _ ___| |_ ___ _ __ _ __ ___  _ _ __   __| |
