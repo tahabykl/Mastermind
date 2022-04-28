@@ -17,9 +17,9 @@ public class Mastermind {
     ArrayList<String> correct = new ArrayList<String>(); // The ArrayList containing the correct digits
 
     public Mastermind(){
-        Scanner Acunetix = new Scanner(System.in);
+        Scanner startGame = new Scanner(System.in);
         System.out.print("Do you wanna play MasterMind ❓ (y/N) ");
-        game = Acunetix.nextLine();
+        game = startGame.nextLine();
         if (game.equals("y") || game.equals("Y")) {
             this.newGame();
         }
@@ -29,10 +29,10 @@ public class Mastermind {
     }
 
     public void newGame(){
-        Scanner Brunhilda = new Scanner(System.in);
+        Scanner randomSecret = new Scanner(System.in);
         Random rand = new Random();
         System.out.print("Enter the number of digits of the secret: ");
-        numDigit = Integer.parseInt(Brunhilda.nextLine());
+        numDigit = Integer.parseInt(randomSecret.nextLine());
 
         for (int i = 0; i < numDigit; i++){
             correct.add("X");
@@ -43,7 +43,7 @@ public class Mastermind {
 
         while (true) {
             System.out.print("Guess the number: ");
-            strGuess = Brunhilda.nextLine();
+            strGuess = randomSecret.nextLine();
             guess = Integer.parseInt(strGuess);
             guessCount ++;
 
