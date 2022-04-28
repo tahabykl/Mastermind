@@ -75,7 +75,7 @@ public class Mastermind {
                 }
                 else if (guessCount <= 10){
                     System.out.println("You've become a Mastermind!");
-                    System.out.println("It took you " + guessCount + " guesses! Try harder next time!");
+                    System.out.println("It took you " + guessCount + " guesses! \uD83D\uDE0E Try harder next time!");
                     break;
                 }
                 else {
