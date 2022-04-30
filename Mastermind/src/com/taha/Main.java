@@ -2,7 +2,7 @@ package com.taha;
 
 public class Main extends Mastermind {
 
-    public Main() {
+    public Main(){
 
     }
 
@@ -24,6 +24,6 @@ public class Main extends Mastermind {
 
     public static void main(String[] args) {
         System.out.println(printBanner()); // Prints the banner
-        Mastermind game = new Mastermind(); // Creates a new Mastermind object called game
+        Mastermind game = new Mastermind(); // Creates a new Mastermind object called game. This will run the constructor and the constructor of the Mastermind class and the constructor will set up a new game.
     }
 }

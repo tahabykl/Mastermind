@@ -18,13 +18,35 @@ public class Mastermind {
 
     public Mastermind(){
         Scanner startGame = new Scanner(System.in);
-        System.out.print("Do you wanna play MasterMind ❓ (y/N) ");
+        System.out.print("Do you want to play MasterMind ❓ (y/N) ");
         game = startGame.nextLine();
         if (game.equals("y") || game.equals("Y")) {
             this.newGame();
         }
         else {
             System.out.println("Hope to see you play Mastermind next time!");
+        }
+    }
+
+    public void resetVars(){
+        numDigit = 4; // Clears the value of number of digits in the secret for the new game
+        guess = 0; // Clears the value of guess made by the player for the new game
+        guessCount = 0; // Clears the value of number of guesses made by the player for the new game
+        correctCharCount = 0; // Clears the value of number of correct digits in the guess for the new game
+        correct.clear(); // Clears the ArrayList containing the correct digits for the new game
+    }
+
+    public void playAgain(){
+        resetVars();
+        System.out.println();
+        Scanner startGame = new Scanner(System.in);
+        System.out.print("Do you want to play again ❓ (y/N) ");
+        game = startGame.nextLine();
+        if (game.equals("y") || game.equals("Y")) {
+            this.newGame();
+        }
+        else {
+            System.out.println("Goodbye!");
         }
     }
 
@@ -42,9 +64,17 @@ public class Mastermind {
         strSecret = String.valueOf(secret);
 
         while (true) {
-            System.out.print("Guess the number: ");
-            strGuess = randomSecret.nextLine();
-            guess = Integer.parseInt(strGuess);
+            while (true) {
+                System.out.print("Guess the number: ");
+                strGuess = randomSecret.nextLine();
+                if (strGuess.length() == numDigit) {
+                    guess = Integer.parseInt(strGuess);
+                    break;
+                } else {
+                    System.out.println("Please enter a " + numDigit + " digit number.");
+                }
+            }
+
             guessCount ++;
 
             if (guess != secret) {
@@ -84,8 +114,10 @@ public class Mastermind {
                     break;
                 }
 
-
             }
         }
+
+        playAgain();
+
     }
 }
