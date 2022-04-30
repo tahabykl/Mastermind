@@ -39,6 +39,7 @@ public class Mastermind {
     public void playAgain(){
         resetVars();
         System.out.println();
+
         Scanner startGame = new Scanner(System.in);
         System.out.print("Do you want to play again ❓ (y/N) ");
         game = startGame.nextLine();
