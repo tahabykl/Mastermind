@@ -9,19 +9,20 @@ public class Mastermind {
     int numDigit = 4; // Number of digits in the secret
     int guess; // Guess made by the player
     int guessCount = 0; // Number of guesses made by the player
-    int correctCharCount; // Number of correct digits in the guess
+    int correctDigitCount; // Number of correct digits in the guess
     String strGuess; // The String version of the variable "guess". I used it to compare indices
     String strSecret; // The String version of the variable "secret". I used it to compare indices
     String correctGuess; // Takes the correct digits of the guess and passes them to the ArrayList named "correct"
     String game; // Determines if the game is starting or not
-    ArrayList<String> correct = new ArrayList<>(); // The ArrayList containing the correct digits
+
+    ArrayList<String> correctDigits = new ArrayList<>(); // The ArrayList containing the correct digits
 
     public Mastermind(){
         Scanner startGame = new Scanner(System.in);
         System.out.print("Do you want to play MasterMind ❓ (y/N) ");
         game = startGame.nextLine();
         if (game.equals("y") || game.equals("Y")) {
-            this.newGame();
+            this.setUpGame();
         }
         else {
             System.out.println("Hope to see you play Mastermind next time!");
@@ -32,8 +33,8 @@ public class Mastermind {
         numDigit = 4; // Clears the value of number of digits in the secret for the new game
         guess = 0; // Clears the value of guess made by the player for the new game
         guessCount = 0; // Clears the value of number of guesses made by the player for the new game
-        correctCharCount = 0; // Clears the value of number of correct digits in the guess for the new game
-        correct.clear(); // Clears the ArrayList containing the correct digits for the new game
+        correctDigitCount = 0; // Clears the value of number of correct digits in the guess for the new game
+        correctDigits.clear(); // Clears the ArrayList containing the correct digits for the new game
     }
 
     public void playAgain(){
@@ -44,26 +45,34 @@ public class Mastermind {
         System.out.print("Do you want to play again ❓ (y/N) ");
         game = startGame.nextLine();
         if (game.equals("y") || game.equals("Y")) {
-            this.newGame();
+            this.setUpGame();
         }
         else {
             System.out.println("Goodbye!");
         }
     }
 
-    public void newGame(){
+    //setUpGame
+
+    public void setUpGame() {
         Scanner randomSecret = new Scanner(System.in);
         Random rand = new Random();
         System.out.print("Enter the number of digits of the secret: ");
         numDigit = Integer.parseInt(randomSecret.nextLine());
 
-        for (int i = 0; i < numDigit; i++){
-            correct.add("X");
+        for (int i = 0; i < numDigit; i++) {
+            correctDigits.add("X"); // Adds "X"s to the ArrayList correctDigits to indicate the digits that are not guessed correctly
         }
 
-        int secret = rand.nextInt((int)Math.pow(10, numDigit)); // Generates a random integer within the specified range
+        int secret = rand.nextInt((int) Math.pow(10, numDigit)); // Generates a random integer within the specified range
         strSecret = String.valueOf(secret);
 
+        this.newGame(randomSecret, numDigit, secret); // The newGame method is called here
+    }
+
+    //newGame
+
+    public void newGame(Scanner randomSecret, int numDigit, int secret){
         while (true) {
             while (true) {
                 System.out.print("Guess the number: ");
@@ -80,16 +89,16 @@ public class Mastermind {
 
             if (guess != secret) {
                 for (int i = 0; i < numDigit; i++) {
-                    if (strGuess.charAt(i) == strSecret.charAt(i)) {
-                        correctCharCount ++;
-                        correctGuess = String.valueOf(strGuess.charAt(i));
-                        correct.set(i, correctGuess);
+                    if (strGuess.charAt(i) == strSecret.charAt(i)) { // If not all the digits are guessed correctly, the following lines will run to only print the correct digits
+                        correctDigitCount ++; // Increment the correct digit count by one
+                        correctGuess = String.valueOf(strGuess.charAt(i)); // Storing the correct digit in a variable called correctGuess
+                        correctDigits.set(i, correctGuess); // Setting the value of  i'th index of the ArrayList named correct
                     }
                 }
 
-                System.out.println("You couldn't guess it all correct but you got " + correctCharCount + " characters correct."); // Prints the number of digits guessed correctly
+                System.out.println("You couldn't guess it all correct but you got " + correctDigitCount + " characters correct."); // Prints the number of digits guessed correctly
 
-                for (String i : correct) // If the user did not guess all the digits correctly, prints out the digits that are guessed correctly
+                for (String i : correctDigits) // If the user did not guess all the digits correctly, prints out the digits that are guessed correctly
                 {
                     System.out.print(i);
                 }
