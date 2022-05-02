@@ -8,12 +8,15 @@ import java.util.Scanner;
 public class Mastermind {
     int numDigit = 4; // Number of digits in the secret
     int guess; // Guess made by the player
+    int secret;
     int guessCount = 0; // Number of guesses made by the player
     int correctDigitCount; // Number of correct digits in the guess
+    int difficulty;
     String strGuess; // The String version of the variable "guess". I used it to compare indices
     String strSecret; // The String version of the variable "secret". I used it to compare indices
     String correctGuess; // Takes the correct digits of the guess and passes them to the ArrayList named "correct"
     String game; // Determines if the game is starting or not
+    Scanner randomSecret;
 
     ArrayList<String> correctDigits = new ArrayList<>(); // The ArrayList containing the correct digits
 
@@ -52,27 +55,40 @@ public class Mastermind {
         }
     }
 
+    public void generateSecret(int numDigit){
+
+        randomSecret = new Scanner(System.in);
+        Random rand = new Random();
+
+        secret = rand.nextInt((int) Math.pow(10, numDigit)); // Generates a random integer within the specified range
+        strSecret = String.valueOf(secret);
+    }
+
     //setUpGame
 
     public void setUpGame() {
-        Scanner randomSecret = new Scanner(System.in);
-        Random rand = new Random();
-        System.out.print("Enter the number of digits of the secret: ");
-        numDigit = Integer.parseInt(randomSecret.nextLine());
+        Scanner diff = new Scanner(System.in);
+        System.out.print("Select a difficulty level: \n \n 1-Easier Than Easy \n 2-Standart \n 3-Expert \n \n -> ");
+        difficulty = Integer.parseInt(diff.nextLine());
+
+        this.newGame(difficulty); // The newGame method is called here
+    }
+
+    public void newGame(int difficulty){
+
+        if (difficulty == 1)
+            numDigit = 3;
+        else if (difficulty == 2)
+            numDigit = 4;
+        else if (difficulty == 3)
+            numDigit = 5;
+
+        generateSecret(numDigit);
 
         for (int i = 0; i < numDigit; i++) {
             correctDigits.add("X"); // Adds "X"s to the ArrayList correctDigits to indicate the digits that are not guessed correctly
         }
 
-        int secret = rand.nextInt((int) Math.pow(10, numDigit)); // Generates a random integer within the specified range
-        strSecret = String.valueOf(secret);
-
-        this.newGame(randomSecret, numDigit, secret); // The newGame method is called here
-    }
-
-    //newGame
-
-    public void newGame(Scanner randomSecret, int numDigit, int secret){
         while (true) {
             while (true) {
                 System.out.print("Guess the number: ");
@@ -85,7 +101,7 @@ public class Mastermind {
                 }
             }
 
-            guessCount ++;
+            guessCount ++; // Increments the guess count by one
 
             if (guess != secret) {
                 for (int i = 0; i < numDigit; i++) {
@@ -107,7 +123,8 @@ public class Mastermind {
 
             }
 
-            if (guess == secret) {
+            if (guess == secret) { // checks if the guess count is lower than or equal to 3, or is in the interval (3,10], or greater than 10
+
                 if (guessCount <= 3){
                     System.out.println("You've become a Mastermind!");
                     System.out.println("And wow! It took you only " + guessCount + " guesses! \uD83D\uDE0E");
