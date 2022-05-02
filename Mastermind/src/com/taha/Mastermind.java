@@ -8,19 +8,19 @@ import java.util.Scanner;
 public class Mastermind {
     int numDigit = 4; // Number of digits in the secret
     int guess; // Guess made by the player
-    int secret;
+    int secret; // The computer-generated random number
     int guessCount = 0; // Number of guesses made by the player
     int correctDigitCount; // Number of correct digits in the guess
-    int difficulty;
+    int difficulty; // Difficult level
     String strGuess; // The String version of the variable "guess". I used it to compare indices
     String strSecret; // The String version of the variable "secret". I used it to compare indices
     String correctGuess; // Takes the correct digits of the guess and passes them to the ArrayList named "correct"
     String game; // Determines if the game is starting or not
-    Scanner randomSecret;
+    Scanner randomSecret; // For the user input
 
     ArrayList<String> correctDigits = new ArrayList<>(); // The ArrayList containing the correct digits
 
-    public Mastermind(){
+    public Mastermind(){ // The constructor for the Mastermind class. Asks the user if they want to start a new Mastermind game or not.
         Scanner startGame = new Scanner(System.in);
         System.out.print("Do you want to play MasterMind ❓ (y/N) ");
         game = startGame.nextLine();
@@ -55,12 +55,12 @@ public class Mastermind {
         }
     }
 
-    public void generateSecret(int numDigit){
+    public void generateSecret(int numDigit){ // Generates a random integer that has numDigit digits
 
         randomSecret = new Scanner(System.in);
         Random rand = new Random();
 
-        secret = rand.nextInt((int) Math.pow(10, numDigit)); // Generates a random integer within the specified range
+        secret = rand.nextInt((int) Math.pow(10, numDigit));
         strSecret = String.valueOf(secret);
     }
 
