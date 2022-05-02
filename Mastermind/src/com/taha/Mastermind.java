@@ -114,6 +114,8 @@ public class Mastermind {
 
                 System.out.println("You couldn't guess it all correct but you got " + correctDigitCount + " characters correct."); // Prints the number of digits guessed correctly
 
+                correctDigitCount = 0;
+
                 for (String i : correctDigits) // If the user did not guess all the digits correctly, prints out the digits that are guessed correctly
                 {
                     System.out.print(i);
@@ -122,6 +124,8 @@ public class Mastermind {
                 System.out.print("\n");
 
             }
+
+            correctDigits.clear();
 
             if (guess == secret) { // checks if the guess count is lower than or equal to 3, or is in the interval (3,10], or greater than 10
 
