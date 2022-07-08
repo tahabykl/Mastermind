@@ -1,10 +1,1 @@
-# java-mastermind
-
-```
-                      _                      _           _
-                     | |                    (_)         | |
-  _ __ ___   __ _ ___| |_ ___ _ __ _ __ ___  _ _ __   __| |
- | '_ ` _ \ / _` / __| __/ _ \ '__| '_ ` _ \| | '_ \ / _` |
- | | | | | | (_| \__ \ ||  __/ |  | | | | | | | | | | (_| |
- |_| |_| |_|\__,_|___/\__\___|_|  |_| |_| |_|_|_| |_|\__,_|
-```
+This repository contains the code of the game I created for the AP CSP Performance Task.
